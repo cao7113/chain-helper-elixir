@@ -1,0 +1,22 @@
+# https://taskfile.dev
+version: "3"
+tasks:
+  default:
+    deps:
+      - build
+    cmds:
+      - bin/eops
+
+  sh: iex -S mix
+  # elixir -S mix run --no-halt --detached
+  # put into local paths
+  build: mix escript.build --force
+  # install into PATH
+  # mix do escript.build + escript.install
+  install:
+    cmds:
+      - mix escript.build
+      - mix escript.install --force
+  script: mix escript
+
+  create: mix new chain-helper-elixir --app chain_helper
